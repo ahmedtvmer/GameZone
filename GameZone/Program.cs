@@ -1,5 +1,4 @@
-using GameZone.Data;
-using Microsoft.EntityFrameworkCore;
+
 
 namespace GameZone
 {
@@ -15,6 +14,9 @@ namespace GameZone
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
+            builder.Services.AddScoped<ICategoriesServices, CategoriesServices>();
+            builder.Services.AddScoped<IDevicesServices, DevicesServices>();
+            builder.Services.AddScoped<IGamesServices, GamesServices>();
 
             var app = builder.Build();
 
