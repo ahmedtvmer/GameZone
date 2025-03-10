@@ -1,8 +1,43 @@
-﻿@{
+﻿@model IEnumerable<Game>
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@if (!Model.Any())
+{
+    <div class="alert alert-warning m-4">
+        <h1 class="alert-heading d-flex justify-content-center">No Games!</h1>
+        <h3 class="mb-0 d-flex justify-content-center">No games added yet</h3>
+    </div>
+}
+else
+{
+    <div class="row mt-5">
+        @foreach (var game in Model)
+        {
+            <div class="col-lg-4 col-md-6">
+                <div class="card border-light mb-3 rounded rounded-3 overflow-hidden" style="max-width: 20rem;">
+                    <a class="text-decoration-none" asp-controller="Games" asp-action="Details" asp-route-id="@game.Id">
+                        <div class="card-body" style="background-image: url(@($"{FileSettings.ImagesPath}/{game.Cover}")); background-size:cover; background-position:center; height:400px">
+                            <div class="d-flex align-items-end h-100">
+                                <span class="badge bg-primary rounded-0 fs-5">@game.Category.Name</span>
+                            </div>
+                        </div>
+                        <div class="card-footer text-muted d-flex justify-content-between align-items-center mb-2">
+                            <h6 class="fs-6">@game.Name</h6>
+                            <div>
+                                @foreach (var device in game.GameDevices)
+                                {
+                                    <i class="@device.Device.Icon fs-5 text-primary"></i>
+                                }
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+
+

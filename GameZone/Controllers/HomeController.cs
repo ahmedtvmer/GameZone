@@ -6,16 +6,16 @@ namespace GameZone.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
+    private readonly IGamesServices _gamesServices;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(IGamesServices gamesServices)
     {
-        _logger = logger;
+        _gamesServices = gamesServices;
     }
 
     public IActionResult Index()
     {
-        return View();
+        return View(_gamesServices.GetAll());
     }
 
     public IActionResult Privacy()

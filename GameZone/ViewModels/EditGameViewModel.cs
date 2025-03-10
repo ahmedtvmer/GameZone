@@ -1,12 +1,12 @@
 ﻿using GameZone.Attributes;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace GameZone.ViewModels
 {
-    public class CreateGameViewModel : GameBaseViewModel
+    public class EditGameViewModel : GameBaseViewModel
     {
         [AllowedExtensions(FileSettings.AllowedExtensions)]
         [MaxFileSize(FileSettings.MaxFileSizeInMB)]
-        public IFormFile Cover { get; set; } = default!;
+        public IFormFile? Cover { get; set; } = default!;
+        public string? CurrentCover { get; set; }
     }
 }

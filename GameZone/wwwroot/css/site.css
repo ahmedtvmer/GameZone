@@ -22,7 +22,7 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+/*    margin-bottom: 60px;*/
 }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
@@ -33,3 +33,53 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+
+/*Custom CSS start here*/
+.cover-preview {
+    max-height: 400px;
+    border-radius: 10px;
+}
+
+/* Ensure footer stays within card boundaries */
+.card-footer {
+    width: inherit; /* Default Bootstrap padding */
+    background-color: transparent;
+    width: 20rem; /* Match card background */
+}
+
+/* Ensure table cells support horizontal layout */
+.table td {
+    vertical-align: middle; /* Align content vertically in the cell */
+}
+
+/* Force flex items to stay side by side */
+.d-flex {
+    flex-wrap: nowrap; /* Prevent wrapping to a new line */
+}
+
+    /* Ensure the text div takes available space */
+    .d-flex .d-flex {
+        flex: 1; /* Allow the text div to grow and fill space */
+        min-width: 0; /* Prevent overflow from long text */
+    }
+
+    /* Handle text overflow if needed */
+    .d-flex flex-column h4, .d-flex flex-column h5 {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 200px; /* Adjust based on your design */
+    }
+
+    .swal2-title, .swal2-html-container{
+        color: #fff !important;
+    }
+
+    div:where(.swal2-container) div:where(.swal2-popup){
+        background: #1a0933;
+    }
+
+.selection {
+    background-color: #1e0731;
+}
+/*Custom CSS end here*/

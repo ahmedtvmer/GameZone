@@ -1,15 +1,15 @@
-﻿@model CreateGameViewModel
+﻿@model EditGameViewModel
 @{
-    ViewData["Title"] = "Add Game";
+    ViewData["Title"] = "Edit Game";
 }
 
 <h2 style="overflow:hidden">
     <i class="bi bi-plus-circle-dotted"></i>
-    Add A New Game
+    Edit Game
 </h2>
 
-<form asp-action="Create" asp-controller="Games" method="post" enctype="multipart/form-data">
-    @* <div asp-validation-summary="All" class="text-danger"></div> *@
+<form asp-action="Edit" asp-controller="Games" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="All" class="text-danger"></div> 
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
@@ -47,14 +47,13 @@
             <button type="submit" class="btn btn-light text-black mt-3">Submit</button>
         </div>
         <div class="col-md-6">
-            <img class="cover-preview m-lg-3 d-none"  alt="Cover">
+            <img src="@($"{FileSettings.ImagesPath}/{Model.CurrentCover}")" alt="@Model.Name" class="cover-preview m-lg-3">
         </div>
     </div>
 </form>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-    <script src="~/js/game-form.js" asp-append-version="true"></script>
 }
 
 
