@@ -2,11 +2,13 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-<a asp-action="Create" asp-controller="Games" class="btn btn-primary btn-lg">
-    <i class="bi bi-plus-circle-dotted"></i>
-    Add Game
-</a>
+@if (User.IsInRole("Admin"))
+{
+    <a asp-action="Create" asp-controller="Games" class="btn btn-primary btn-lg">
+        <i class="bi bi-plus-circle-dotted"></i>
+        Add Game
+    </a>
+}
 
 @if (!Model.Games.Any())
 {
@@ -39,14 +41,14 @@ else
                                 <a asp-controller="Games" asp-action="Details" asp-route-id="@game.Id" class="btn btn-outline-info rounded rounded-3 me-3">
                                     <i class="bi bi-info-lg"></i>
                                 </a>
-                                @if(User.IsInRole("Admin"))
+                                @if (User.IsInRole("Admin"))
                                 {
-                                <a asp-controller="Games" asp-action="Edit" asp-route-id="@game.Id" class="btn btn-outline-primary rounded rounded-3 me-3">
-                                    <i class="bi bi-pencil-fill"></i>
-                                </a>
-                                <a href="javascript:" class="btn btn-outline-danger rounded rounded-3 me-2 js-delete" data-id="@game.Id">
-                                    <i class="bi bi-trash-fill"></i>
-                                </a>
+                                    <a asp-controller="Games" asp-action="Edit" asp-route-id="@game.Id" class="btn btn-outline-primary rounded rounded-3 me-3">
+                                        <i class="bi bi-pencil-fill"></i>
+                                    </a>
+                                    <a href="javascript:" class="btn btn-outline-danger rounded rounded-3 me-2 js-delete" data-id="@game.Id">
+                                        <i class="bi bi-trash-fill"></i>
+                                    </a>
                                 }
                             </div>
                         </td>
