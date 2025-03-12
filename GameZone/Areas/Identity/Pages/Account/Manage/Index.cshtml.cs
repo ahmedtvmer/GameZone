@@ -18,13 +18,15 @@ namespace GameZone.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly ISmsSender _smsSender;
 
         public IndexModel(
             UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager)
+            SignInManager<IdentityUser> signInManager, ISmsSender _smsSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            this._smsSender = _smsSender;
         }
 
         /// <summary>
@@ -76,6 +78,8 @@ namespace GameZone.Areas.Identity.Pages.Account.Manage
                 Username = userName,
                 PhoneNumber = phoneNumber
             };
+
+            IsPhoneNumberConfirmed = await _userManager.IsPhoneNumberConfirmedAsync(user);
         }
 
         public async Task<IActionResult> OnGetAsync()
@@ -129,9 +133,33 @@ namespace GameZone.Areas.Identity.Pages.Account.Manage
                 }
             }
 
+
+
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
             return RedirectToPage();
         }
+
+        public async Task<IActionResult> OnPostSendVerificationPhoneAsync()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null) return NotFound();
+
+            if (string.IsNullOrEmpty(Input.PhoneNumber))
+            {
+                ModelState.AddModelError("Input.PhoneNumber", "Phone number is required.");
+                return Page();
+            }
+
+            user.PhoneNumber = Input.PhoneNumber; // Update phone number if changed
+            await _userManager.UpdateAsync(user);
+
+            var code = await _userManager.GenerateChangePhoneNumberTokenAsync(user, user.PhoneNumber);
+            await _smsSender.SendSmsAsync(user.PhoneNumber, $"Your GameZone verification code is: {code}");
+
+            return RedirectToPage("/Account/ConfirmPhone", new { area = "Identity", userId = user.Id });
+        }
+
+        public bool IsPhoneNumberConfirmed { get; set; }
     }
 }

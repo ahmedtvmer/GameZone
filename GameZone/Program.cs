@@ -25,10 +25,12 @@ namespace GameZone
             builder.Services.AddScoped<IDevicesServices, DevicesServices>();
             builder.Services.AddScoped<IGamesServices, GamesServices>();
             builder.Services.AddTransient<IEmailSender, EmailSender>();
+            builder.Services.AddTransient<ISmsSender, SmsSender>();
 
             builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
             {
-                options.SignIn.RequireConfirmedAccount = false; // Set to false for now to test
+                options.SignIn.RequireConfirmedAccount = false;
+                options.User.RequireUniqueEmail = true;
             })
             .AddEntityFrameworkStores<AppDbContext>()
             .AddDefaultTokenProviders()

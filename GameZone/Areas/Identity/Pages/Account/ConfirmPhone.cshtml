@@ -1,0 +1,23 @@
+﻿    @page
+    @model GameZone.Areas.Identity.Pages.Account.ConfirmPhoneModel
+    @{
+    }
+
+@{
+    ViewData["Title"] = "Confirm Phone Number";
+}
+
+<h2>Confirm Your Phone Number</h2>
+<p>We’ve sent a code to your phone. Please enter it below to verify your number.</p>
+
+<form method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input asp-for="Input.UserId" type="hidden" />
+    <div class="form-group">
+        <label asp-for="Input.Code" class="form-label"></label>
+        <input asp-for="Input.Code" class="form-control" placeholder="Enter your code" />
+        <span asp-validation-for="Input.Code" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Verify</button>
+    <a asp-page="./SendPhoneCode" asp-route-userId="@Model.Input.UserId" class="btn btn-link">Resend Code</a>
+</form>
