@@ -1,7 +1,9 @@
 ﻿
+
+
 namespace GameZone.Data
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<IdentityUser>
     {
         public DbSet<Game> Games { get; set; }
         public DbSet<Device> Devices { get; set; }

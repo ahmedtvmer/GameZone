@@ -1,0 +1,35 @@
+﻿@model ManageUsersViewModel
+
+@{
+    ViewData["Title"] = "Manage Users";
+}
+
+<h1>Manage Users</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>Roles</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model.Users)
+        {
+            <tr>
+                <td>@user.Email</td>
+                <td>@string.Join(", ", Model.UserRoles[user.Id])</td>
+                <td>
+                    <form asp-action="UpdateRole" method="post">
+                        <input type="hidden" name="userId" value="@user.Id" />
+                        <select name="role" class="form-select d-inline w-auto" asp-items="@(new SelectList(Model.AllRoles, "Name", "Name"))">
+                            <option value="">None</option>
+                        </select>
+                        <button type="submit" class="btn btn-sm btn-primary">Update Role</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

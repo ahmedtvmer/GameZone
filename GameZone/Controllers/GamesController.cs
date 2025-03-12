@@ -1,8 +1,10 @@
 ﻿
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace GameZone.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class GamesController : Controller
     {
         private readonly ICategoriesServices categories;
@@ -15,6 +17,7 @@ namespace GameZone.Controllers
             this.devices = devices;
             this._gameService = games;
         }
+        [AllowAnonymous]
         public IActionResult Index([FromQuery] PaginationViewModel pagination, string searchTerm)
         {
             ViewBag.SearchTerm = searchTerm;
@@ -34,6 +37,7 @@ namespace GameZone.Controllers
             return View(model);
         }
 
+        [AllowAnonymous]
         public IActionResult Details(int id)
         {
             Game game = _gameService.GetGame(id);

@@ -32,6 +32,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="ManageUsers">Add UserRole</a>
+                            </li>
+                        }
                     </ul>
                     <form asp-action="Index" asp-controller="@(ViewContext.RouteData.Values["Controller"])" method="get" class="d-flex">
                         <input class="form-control me-sm-2" type="search" name="searchTerm" placeholder="Search" value="@ViewBag.SearchTerm">
@@ -40,6 +46,7 @@
                             Search
                         </button>
                     </form>
+                    <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>

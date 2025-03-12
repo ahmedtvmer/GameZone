@@ -1,9 +1,10 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using GameZone.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GameZone.Controllers;
-
+[Authorize]
 public class HomeController : Controller
 {
     private readonly IGamesServices _gamesServices;
