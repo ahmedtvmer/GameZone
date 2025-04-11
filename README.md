@@ -3,14 +3,15 @@
 ### GameZone is a full-stack web application built using ASP.NET Core MVC and SQL Server, designed to provide a dynamic platform where users can register, log in, and explore detailed information about various games. The application features secure role-based access control, allowing administrators to manage game records by adding, updating, or deleting entries, as well as assigning roles to specific users through a dedicated admin interface. It includes a built-in search engine and pagination functionality to enhance user experience and make game browsing more efficient. With a focus on clean architecture, responsive UI, and maintainable code, GameZone follows best practices in authentication, authorization, and data management using Entity Framework Core.
 
 ## Tech Stack
-> Html
-> Css
-> Jquery
-> Bootstrap
-> ASP.NET MVC Core
-> Entity Framework Core
-> Sql Server
-> Razor Pages
+- HTML  
+- CSS  
+- jQuery  
+- Bootstrap  
+- ASP.NET Core MVC  
+- Entity Framework Core  
+- SQL Server  
+- Razor Pages
+
 
 ## Login Page
 ![image](https://github.com/user-attachments/assets/595d9cae-ee37-4832-8e3a-c6ef34b41cac)
